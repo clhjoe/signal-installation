@@ -1,0 +1,36 @@
+version: '3'
+services:
+  signal_redis:                            
+    image: redis:5.0.5-alpine       
+    container_name: signal_redis  
+    restart:        always
+    ports:
+      - '46379:6379'
+
+  signal_postgresql:
+    image: postgres:13.2-alpine
+    container_name: signal-postgres
+    restart: always
+    environment:
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB:       signal
+      PGDATA:            /data/signal/postgres_database
+    ports:
+      - '45432:5432'
+    volumes:
+      - /data/signal/postgres_database:/data/signal/postgres_database
+
+  signal_localstack:
+    container_name: signal_localstack
+    image: localstack/localstack-full
+    ports:
+      - "${LOCALSTACK_PORT}:4566"
+      - "44571:4571"
+      - "48080:8080"
+    environment:
+      - SERVICES=s3,sqs
+      - DATA_DIR=/data/signal/localstack
+      - PORT_WEB_UI=${PORT_WEB_UI- }
+    volumes:
+      - "/data/signal/localstack:/data/signal/localstack"
