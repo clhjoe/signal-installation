@@ -23,6 +23,7 @@ git clone https://github.com/clhjoe/signal-installation.git
 ```
 
 1. Run related services
+   
 Signal server relies on AWS SQS, AWS S3, Redis, and Postgresql. Thanks to container and localstack, we can setup on our local site easily.
 
 ```
