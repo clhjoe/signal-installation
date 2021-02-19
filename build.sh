@@ -30,7 +30,7 @@ GCP_SIGNKEY=${GCP_SIGNKEY//\//\\\/}
 
 
 #====compile====
-#mvn clean install -DskipTests
+mvn clean install -DskipTests
 
 #====create zkconfig
 cerString=`java -jar $SIGNAL_FOLDER/service/target/TextSecureServer-3.21.jar zkparams`
