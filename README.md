@@ -4,8 +4,7 @@ This guide is based on Singnal Server v3.21 and only tested on Ubuntu.
 
 
 ## Prerequisites
-
-* In order to generate proper various keys, you should make sure you have java, openssl, make and bsdmainutils installed.
+* In order to generate proper various keys, make sure you have java, openssl, make and bsdmainutils installed.
 
 ```
 sudo apt-get install -y make bsdmainutils openssl default-jdk
@@ -45,3 +44,10 @@ make build
 ```
 make start
 ```
+# Signal Android
+To compile **Signal Android** should be easy, follow instruction [How-to-build-Signal-from-the-sources](https://github.com/signalapp/Signal-Android/wiki/How-to-build-Signal-from-the-sources) should get you there. If you want to trace connections between App and Server, one possible way is to replace HTTPs with HTTP and use Charles for example to see the traffics.
+
+## Allow HTTP
+
+1. Make a small modification from source. Please reference [replace HTTPs with HTTP](https://github.com/clhjoe/signal-installation/blob/master/use_http_only.patch)
+2. Start **Charles**. Since Signal server does not allow HTTP requests, use **map remote** to map HTTP back to HTTPS. This can avoid facing SSL handshaking errors if you enable SSL proxying directly without steps 1. 

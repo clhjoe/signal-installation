@@ -32,6 +32,8 @@ GCP_SIGNKEY=${GCP_SIGNKEY//\//\\\/}
 #====compile====
 mvn clean install -DskipTests
 
+if [[ ! -f "$FILE" ]]; then
+   
 #====create zkconfig
 cerString=`java -jar $SIGNAL_FOLDER/service/target/TextSecureServer-3.21.jar zkparams`
 counter=0
@@ -89,3 +91,6 @@ sed -i "s/{{POSTGRE_HOST}}/$POSTGRE_HOST/g" $SIGNAL_CONFIG
 java -jar $SIGNAL_FOLDER/service/target/TextSecureServer-3.21.jar abusedb migrate $SIGNAL_CONFIG
 java -jar $SIGNAL_FOLDER/service/target/TextSecureServer-3.21.jar accountdb migrate $SIGNAL_CONFIG
 java -jar $SIGNAL_FOLDER/service/target/TextSecureServer-3.21.jar messagedb migrate $SIGNAL_CONFIG
+ 
+echo "=== All Set ==="
+fi
